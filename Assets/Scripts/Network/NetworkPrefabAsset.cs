@@ -17,10 +17,15 @@ public class NetworkPrefabAsset : NetworkBehaviour, IPlayerLeft
         if (Object.HasInputAuthority)
         {
             Local = this;
+            Camera.main.gameObject.SetActive(false);
             Debug.Log("spawned local palyer");
         }
         else
         {
+            Camera localCamera = GetComponentInChildren<Camera>();
+            localCamera.enabled = false;
+            AudioListener localAudioListener = GetComponentInChildren<AudioListener>();
+            localAudioListener.enabled = false;
             Debug.Log("spawned remote player");
         }
     }

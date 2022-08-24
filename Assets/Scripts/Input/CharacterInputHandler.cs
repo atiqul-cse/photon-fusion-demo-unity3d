@@ -34,7 +34,10 @@ public class CharacterInputHandler : MonoBehaviour
 
         //Debug.Log("moveInputVector " + moveInputVector);
 
-        isJumpButtonPressed = Input.GetButtonDown("Jump");
+        if (Input.GetButtonDown("Jump"))
+        {
+            isJumpButtonPressed = true;
+        }
     }
 
     public NetworkInputData GetNetworkInput()
@@ -43,6 +46,7 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.movementInput = moveInputVector;
         networkInputData.rotationInput = viewInputVector.x;
         networkInputData.isJumpPressed = isJumpButtonPressed;
+        isJumpButtonPressed = false;
         return networkInputData;
     }
 

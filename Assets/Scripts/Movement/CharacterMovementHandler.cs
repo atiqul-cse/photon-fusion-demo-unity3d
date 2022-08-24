@@ -29,6 +29,8 @@ public class CharacterMovementHandler : NetworkBehaviour
         cameraRotationX = Mathf.Clamp(cameraRotationX, -90, 90);
 
         localCamera.transform.localRotation = Quaternion.Euler(cameraRotationX, 0, 0);
+
+        CheckFallRespawn();
     }
 
     public override void FixedUpdateNetwork()
@@ -52,5 +54,13 @@ public class CharacterMovementHandler : NetworkBehaviour
     public void SetViewInputVector(Vector2 viewInputVector)
     {
         this.viewInput = viewInputVector;   
+    }
+
+    void CheckFallRespawn()
+    {
+        if(transform.position.y < -10)
+        {
+            transform.position = Utils.GetRandomSpawnPoint();
+        }
     }
 }
